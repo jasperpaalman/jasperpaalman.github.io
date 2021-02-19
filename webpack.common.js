@@ -9,6 +9,25 @@ module.exports = {
 
   module: {
     rules: [
+      // Semantic UI React loaders
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        exclude: /src/,
+        loader: require.resolve("url-loader"),
+        options: {
+          limit: 10000,
+          name: "static/media/[name].[fullhash].[ext]",
+        },
+      },
+      {
+        test: [/\.eot$/, /\.ttf$/, /\.svg$/, /\.woff$/, /\.woff2$/],
+        exclude: /src/,
+        loader: require.resolve("file-loader"),
+        options: {
+          name: "static/media/[name].[fullhash].[ext]",
+        },
+      },
+
       // Check js codestyle
       {
         enforce: "pre",
@@ -45,12 +64,6 @@ module.exports = {
       },
     ],
   },
-
-  // resolve: {
-  //   alias: {
-  //     d3: "d3/index",
-  //   },
-  // },
 
   plugins: [
     new HtmlWebpackPlugin({
