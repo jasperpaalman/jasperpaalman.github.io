@@ -4,39 +4,56 @@
   "private": true,
   "homepage": "http://jasperpaalman.github.io",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "d3": "^6.5.0",
+    "d3-simple-slider": "^1.10.3",
+    "d3-tip": "^0.9.1",
     "immer": "^8.0.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-router-scroll-top": "^0.2.1",
     "react-scripts": "4.0.2",
+    "sass": "^1.32.7",
+    "semantic-ui-react": "^2.0.3",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "webpack --config webpack.prod.js --progress --color",
+    "start": "webpack serve --config webpack.dev.js --open --progress --color",
+    "fix-style": "eslint ./src/**/*.js --fix"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@babel/plugin-proposal-do-expressions": "^7.12.13",
+    "@babel/plugin-proposal-export-default-from": "^7.12.13",
+    "@babel/plugin-proposal-function-sent": "^7.12.13",
+    "@babel/plugin-proposal-pipeline-operator": "^7.12.13",
+    "@babel/plugin-proposal-throw-expressions": "^7.12.13",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-flow": "^7.12.13",
+    "copy-webpack-plugin": "^7.0.0",
+    "css-loader": "^5.0.2",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "gh-pages": "^3.1.0",
+    "html-webpack-plugin": "^5.1.0",
+    "mini-css-extract-plugin": "^1.3.7",
+    "webpack": "^5.23.0",
+    "webpack-bundle-analyzer": "^4.4.0",
+    "webpack-bundle-tracker": "^1.0.0-alpha.1",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   }
 }
