@@ -13,18 +13,18 @@ module.exports = {
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         exclude: /src/,
-        loader: require.resolve("url-loader"),
+        loader: "url-loader",
         options: {
           limit: 10000,
-          name: "static/media/[name].[fullhash].[ext]",
+          name: "./static/media/[name].[fullhash].[ext]",
         },
       },
       {
         test: [/\.eot$/, /\.ttf$/, /\.svg$/, /\.woff$/, /\.woff2$/],
         exclude: /src/,
-        loader: require.resolve("file-loader"),
+        loader: "file-loader",
         options: {
-          name: "static/media/[name].[fullhash].[ext]",
+          name: "./static/media/[name].[fullhash].[ext]",
         },
       },
 

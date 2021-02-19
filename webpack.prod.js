@@ -8,6 +8,7 @@ module.exports = merge(common, {
 
   output: {
     path: path.resolve("./build/"),
+    publicPath: "",
     filename: "static/js/[name].[fullhash].js",
     clean: true, // Clean the output directory before emit.
   },
