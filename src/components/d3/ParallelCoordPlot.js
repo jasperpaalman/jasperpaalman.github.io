@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import D3Component from './D3Component';
 import './ParallelCoordPlot.scss';
-import { toIcon } from '../../util';
+import toIcon from '../../utils/toIcon';
 
 export default class TimeLine extends D3Component {
   static propTypes = {

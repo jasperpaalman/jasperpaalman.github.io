@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import * as PropTypes from 'prop-types';
 import D3Component from './D3Component';
 import './TimeLine.scss';
-import { toIcon } from '../../util';
+import toIcon from '../../utils/toIcon';
 
 export default class TimeLine extends D3Component {
   static propTypes = {

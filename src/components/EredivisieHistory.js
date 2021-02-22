@@ -21,7 +21,7 @@ export default class EredivisieHistory extends Component {
     }
 
   loadData = () => {
-      d3.json('/static/points_accumulated.json').then((data) => {
+      d3.json('/static/data/points_accumulated.json').then((data) => {
           const years = Object.keys(data).map((d) => +d);
           const minYear = d3.min(years);
           const maxYear = d3.max(years);
