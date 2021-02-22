@@ -71,7 +71,15 @@ module.exports = {
       template: "./src/index.html",
     }),
     new CopyPlugin({
-      patterns: [{ from: "./src/static/", to: "./static/" }],
+      patterns: [
+        {
+          from: "./src/static/",
+          to: "./static/",
+          globOptions: {
+            ignore: ["**/scss/**"],
+          },
+        },
+      ],
     }),
   ],
 
