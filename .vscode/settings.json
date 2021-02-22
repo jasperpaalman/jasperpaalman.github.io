@@ -1,0 +1,26 @@
+{
+  "editor.formatOnSave": true,
+  "python.pythonPath": "c:\\Users\\JPaalman\\.virtualenvs\\Github_Pages-kMaWCAQH\\Scripts\\python.exe",
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": ["--enable=W0614", "--disable=no-member"],
+  "python.linting.enabled": true,
+  "files.associations": {
+    "**/*.html": "html",
+    "**/templates/**/*.html": "django-html",
+    "**/templates/**/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+  },
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#474747"
+  },
+  "[django-html]": {
+    "editor.rulers": [80, 120],
+    "editor.formatOnSave": false
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
