@@ -11,7 +11,7 @@ const About = () => (
             centered
         />
         <TextBlock>
-            <p>This field block can be used to give information on myself.</p>
+            <p>Placeholder</p>
         </TextBlock>
     </div>
 );
