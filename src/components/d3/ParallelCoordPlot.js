@@ -827,7 +827,10 @@ export default class TimeLine extends D3Component {
       d3.select('.legend').style('visibility', 'visible');
       d3.select('#label-rank').style('visibility', 'visible');
 
-      d3.select(this.svg.node().parentNode).on('click', (event) => {
+      const { id } = this;
+      const svg = d3.select(`#${id}`);
+
+      d3.select(svg.node().parentNode).on('click', (event) => {
           const outside = selectors
               .filter((d, i, elem) => elem[i] === event.target)
               .empty();
