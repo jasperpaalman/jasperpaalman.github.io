@@ -1,8 +1,8 @@
 import { Container, Image } from 'semantic-ui-react';
 import * as d3 from 'd3';
 import React, { Component } from 'react';
-import ParallelCoordPlot from './d3/ParallelCoordPlot';
-import { Marked, TextBlock } from './text';
+import ParallelCoordPlot from '../d3/ParallelCoordPlot';
+import { Marked, TextBlock } from '../text';
 
 export default class ClubAnalysis extends Component {
     constructor(props) {

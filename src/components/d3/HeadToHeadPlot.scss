@@ -1,16 +1,12 @@
-:global {
+.bar {
+    fill: #e61d49;
+    opacity: .8;
+}
 
-        .bar {
-            fill: #e61d49;
-            opacity: .8;
-        }
+.val {
+    font: 14px sans-serif;
+}
 
-        .val {
-            font: 14px sans-serif;
-        }
-
-        .highlight {
-            fill: #b4173a;
-        }
-
+.highlight {
+    fill: #b4173a;
 }

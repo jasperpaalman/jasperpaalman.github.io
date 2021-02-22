@@ -16,7 +16,7 @@ module.exports = {
         loader: "url-loader",
         options: {
           limit: 10000,
-          name: "./static/media/[name].[fullhash].[ext]",
+          name: "./static/media/[name].[ext]",
         },
       },
       {
@@ -24,7 +24,7 @@ module.exports = {
         exclude: /src/,
         loader: "file-loader",
         options: {
-          name: "./static/media/[name].[fullhash].[ext]",
+          name: "./static/media/[name].[ext]",
         },
       },
 

@@ -56,19 +56,17 @@ export default class TimeLine extends D3Component {
       this.color = d3.scaleOrdinal(colors);
       this.focusClub = null;
 
-      const main = svg.attr('id', 'main-pcp-canvas');
-
       this.width = width - margin.left - margin.right - offset;
       this.height = height - margin.top - margin.bottom;
 
-      this.filter = main
+      this.filter = svg
           .append('g')
           .attr('transform', `translate(${margin.left},0)`)
           .attr('id', 'year-selector');
 
       this.createYearSelector();
 
-      this.pcp = main
+      this.pcp = svg
           .append('g')
           .attr('transform', `translate(${margin.left},${margin.top})`)
           .attr('id', 'pcp');
@@ -829,40 +827,37 @@ export default class TimeLine extends D3Component {
       d3.select('.legend').style('visibility', 'visible');
       d3.select('#label-rank').style('visibility', 'visible');
 
-      d3.select(d3.select('#main-pcp-canvas').node().parentNode).on(
-          'click',
-          (event) => {
-              const outside = selectors
-                  .filter((d, i, elem) => elem[i] === event.target)
-                  .empty();
+      d3.select(this.svg.node().parentNode).on('click', (event) => {
+          const outside = selectors
+              .filter((d, i, elem) => elem[i] === event.target)
+              .empty();
 
-              // console.log(d3.event.target);
-              // console.log(outside);
-              // console.log(icons);
-              // console.log(d3.select('.icon').node());
+          // console.log(d3.event.target);
+          // console.log(outside);
+          // console.log(icons);
+          // console.log(d3.select('.icon').node());
 
-              if (outside) {
-                  // Remove focus
-                  this.focusClub = null;
+          if (outside) {
+              // Remove focus
+              this.focusClub = null;
 
-                  d3.selectAll('.result-block').remove();
-                  d3.selectAll('.result-link').remove();
-                  d3.selectAll('.rank-change').remove();
+              d3.selectAll('.result-block').remove();
+              d3.selectAll('.result-link').remove();
+              d3.selectAll('.rank-change').remove();
 
-                  markedLine.classed('focus', false);
+              markedLine.classed('focus', false);
 
-                  this.removeHighlight(club);
+              this.removeHighlight(club);
 
-                  otherIcons.attr('opacity', 1);
-                  otherLines.classed('hidden', false);
+              otherIcons.attr('opacity', 1);
+              otherLines.classed('hidden', false);
 
-                  this.editKPI(this.dataYear.KPI.Overall);
+              this.editKPI(this.dataYear.KPI.Overall);
 
-                  d3.select('.legend').style('visibility', 'hidden');
-                  d3.select('#label-rank').style('visibility', 'hidden');
-              }
-          },
-      );
+              d3.select('.legend').style('visibility', 'hidden');
+              d3.select('#label-rank').style('visibility', 'hidden');
+          }
+      });
   };
 
   wrap = (text, width) => {

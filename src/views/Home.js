@@ -1,16 +1,17 @@
 import React from 'react';
-import { Image } from 'semantic-ui-react';
-import EredivisieHistory from '../components/EredivisieHistory';
-import ClubAnalysis from '../components/ClubAnalysis';
+import About from '../components/sections/About';
+import Eredivisie from '../components/sections/Eredivisie';
 
 const Home = () => (
-    <div>
-        <Image
-            src="/static/image/banner.svg"
-            style={{ width: '100%', marginBottom: '-1px' }}
-        />
-        <ClubAnalysis />
-        <EredivisieHistory />
+    <div
+        style={{
+            'margin-top': '32pt',
+            'margin-right': '10pt',
+            'margin-left': '10pt',
+        }}
+    >
+        <About />
+        <Eredivisie />
     </div>
 );
 

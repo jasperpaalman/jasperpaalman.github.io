@@ -1,10 +1,10 @@
 import { Container, Image } from 'semantic-ui-react';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import TimeLine from './d3/TimeLine';
-import RankGrid from './d3/RankGrid';
-import TimeSelector from './d3/TimeSelector';
-import { CustomHeader, Marked, TextBlock } from './text';
+import TimeLine from '../d3/TimeLine';
+import RankGrid from '../d3/RankGrid';
+import TimeSelector from '../d3/TimeSelector';
+import { CustomHeader, Marked, TextBlock } from '../text';
 
 export default class EredivisieHistory extends Component {
     constructor(props) {

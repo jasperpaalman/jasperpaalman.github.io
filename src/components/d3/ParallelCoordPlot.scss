@@ -1,32 +1,33 @@
-:global {
+circle {
+  opacity: 1 !important;
+}
 
-        circle {
-          opacity: 1 !important;
-        }
+.axis path {
+  shape-rendering: crispEdges;
+  opacity: .5;
+}
 
-        .axis text {
-            font-size: 12px;
-            opacity: .8;
-        }
+.axis text {
+    font-size: 12px;
+    opacity: .8;
+}
 
-        #main-pcp-canvas .axis path {
-            opacity: .2;
-        }
+#main-pcp-canvas .axis path {
+    opacity: .2;
+}
 
-        .selector:hover {
-          cursor: pointer;
-        }
+.selector:hover {
+  cursor: pointer;
+}
 
-        .hidden {
-            stroke: #c4c4c4 !important;
-            stroke-width: 2;
-            opacity: .5;
-        }
+.hidden {
+    stroke: #c4c4c4 !important;
+    stroke-width: 2;
+    opacity: .5;
+}
 
-        .focus {
-            stroke: #5b5b5b !important;
-            stroke-width: 6 !important;
-            opacity: 1;
-        }
-
+.focus {
+    stroke: #5b5b5b !important;
+    stroke-width: 6 !important;
+    opacity: 1;
 }
