@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'semantic-ui-css/semantic.min.css';
-import './static/scss/global.scss';
+import './assets/scss/global.scss';
 
 ReactDOM.render(<App />, document.getElementById('root'));

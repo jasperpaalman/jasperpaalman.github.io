@@ -1,5 +1,9 @@
 {
   "parser": "@babel/eslint-parser",
+  "globals": {
+    "window": true,
+    "document": true
+  },
   "extends": "airbnb",
   "rules": {
     "guard-for-in": "warn",

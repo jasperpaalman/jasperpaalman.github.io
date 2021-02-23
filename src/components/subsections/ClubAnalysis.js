@@ -2,7 +2,7 @@ import { Container, Image } from 'semantic-ui-react';
 import * as d3 from 'd3';
 import React, { Component } from 'react';
 import ParallelCoordPlot from '../d3/ParallelCoordPlot';
-import { Marked, TextBlock } from '../text';
+import { Marked, TextBlock } from '../elements/text';
 
 export default class ClubAnalysis extends Component {
     constructor(props) {
@@ -62,7 +62,7 @@ export default class ClubAnalysis extends Component {
           return (
               <div>
                   <Image
-                      src="/static/image/headers/club_analysis.svg"
+                      src="/static/image/headers/eredivisie_club_analysis.svg"
                       style={{ width: '100%' }}
                   />
                   <Container>

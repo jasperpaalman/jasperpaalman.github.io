@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i");
+
+body {
+  font-family: roboto, sans-serif;
+}
+
+.segment {
+  box-shadow: inset 2pt 2pt 10pt rgba(0, 0, 0, 0.2) !important;
+}
+
+circle {
+  opacity: 0.5;
+}
+
+.axis {
+  path {
+    shape-rendering: crispEdges;
+    opacity: 0.5;
+  }
+
+  text {
+    font-size: 8pt;
+    font-family: "roboto", sans-serif;
+    opacity: 0.5;
+    user-select: none;
+
+    &.label {
+      font-family: "roboto", sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      opacity: 1;
+    }
+  }
+}
+
+svg.scatter-plot {
+  overflow: visible !important;
+}
+
+.nav-item {
+  > a {
+    margin-left: 25px;
+    // font-size: 15pt;
+    color: #8f8f8f !important;
+  }
+}
+
+.generic-button {
+  &:hover {
+    cursor: pointer;
+    pointer-events: bounding-box;
+  }
+}

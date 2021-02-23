@@ -9,6 +9,16 @@ module.exports = {
 
   module: {
     rules: [
+      // File loader for background etc.
+      {
+        test: /\.(png|jpg)$/,
+        include: path.join(__dirname, "src/assets/image"),
+        loader: "file-loader",
+        options: {
+          name: "./static/image/[name].[ext]",
+        },
+      },
+
       // Semantic UI React loaders
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -52,14 +62,7 @@ module.exports = {
         test: /\.svg$/,
         exclude: /node_modules/,
         use: {
-          loader: "svg-react-loader",
-          options: {
-            tag: "symbol",
-            attrs: {
-              title: "example",
-            },
-            name: "MyIcon",
-          },
+          loader: "raw-loader",
         },
       },
     ],
@@ -68,16 +71,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      template: "./src/index.html",
+      template: "./public/index.html",
     }),
     new CopyPlugin({
       patterns: [
         {
-          from: "./src/static/",
+          from: "./public/static/",
           to: "./static/",
-          globOptions: {
-            ignore: ["**/scss/**"],
-          },
         },
       ],
     }),

@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import TimeLine from '../d3/TimeLine';
 import RankGrid from '../d3/RankGrid';
 import TimeSelector from '../d3/TimeSelector';
-import { CustomHeader, Marked, TextBlock } from '../text';
+import { CustomHeader, Marked, TextBlock } from '../elements/text';
 
 export default class EredivisieHistory extends Component {
     constructor(props) {
