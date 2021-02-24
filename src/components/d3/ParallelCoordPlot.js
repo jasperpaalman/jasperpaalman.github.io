@@ -23,6 +23,7 @@ export default class TimeLine extends D3Component {
           },
           offset: 120,
           iconSize: 20,
+          currentYear: this.props.defaultYear,
       };
   }
 
@@ -105,13 +106,15 @@ export default class TimeLine extends D3Component {
           )
           .style('fill', '#271D66')
           .on('click', () => {
-              const newYear = this.currentYear - 1;
+              this.setState({ currentYear: this.state.currentYear - 1 });
+              const { currentYear } = this.state;
+
               const selectors = selectorBlocks.selectAll('rect');
 
-              if (years.includes(newYear)) {
-                  selectors.filter((y) => y === newYear).style('fill', '#271D66');
-                  selectors.filter((y) => y !== newYear).style('fill', 'white');
-                  this.updateDraw(newYear);
+              if (years.includes(currentYear)) {
+                  selectors.filter((y) => y === currentYear).style('fill', '#271D66');
+                  selectors.filter((y) => y !== currentYear).style('fill', 'white');
+                  this.updateDraw();
               }
           });
 
@@ -126,13 +129,15 @@ export default class TimeLine extends D3Component {
           )
           .style('fill', '#271D66')
           .on('click', () => {
-              const newYear = this.currentYear + 1;
+              this.setState({ currentYear: this.state.currentYear + 1 });
+              const { currentYear } = this.state;
+
               const selectors = selectorBlocks.selectAll('rect');
 
-              if (years.includes(newYear)) {
-                  selectors.filter((y) => y === newYear).style('fill', '#271D66');
-                  selectors.filter((y) => y !== newYear).style('fill', 'white');
-                  this.updateDraw(newYear);
+              if (years.includes(currentYear)) {
+                  selectors.filter((y) => y === currentYear).style('fill', '#271D66');
+                  selectors.filter((y) => y !== currentYear).style('fill', 'white');
+                  this.updateDraw();
               }
           });
 
@@ -156,12 +161,14 @@ export default class TimeLine extends D3Component {
           })
           .style('stroke', '#271D66')
           .on('click', (event, year) => {
+              this.setState({ currentYear: year });
+
               const selectors = selectorBlocks.selectAll('rect');
 
               selectors.filter((y) => y === year).style('fill', '#271D66');
               selectors.filter((y) => y !== year).style('fill', 'white');
 
-              this.updateDraw(year);
+              this.updateDraw();
           });
 
       selectorBlocks
@@ -365,13 +372,11 @@ export default class TimeLine extends D3Component {
   };
 
   /**  @override */
-  updateDraw = (year) => {
+  updateDraw = () => {
       const { data } = this.props;
-      const { iconSize } = this.state;
+      const { iconSize, currentYear } = this.state;
 
-      this.currentYear = year;
-
-      this.dataYear = data[year];
+      this.dataYear = data[currentYear];
 
       this.pcp.selectAll('*').remove();
 

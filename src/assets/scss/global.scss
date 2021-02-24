@@ -38,11 +38,21 @@ svg.scatter-plot {
   overflow: visible !important;
 }
 
-.nav-item {
-  > a {
-    margin-left: 25px;
-    // font-size: 15pt;
-    color: #8f8f8f !important;
+.menu {
+  img {
+    &:hover {
+      cursor: pointer;
+      filter: drop-shadow(0 0 2px #51d5ff);
+    }
+  }
+
+  .item,
+  .dropdown {
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: #51d5ff;
+      text-decoration-thickness: 2px;
+    }
   }
 }
 
@@ -50,5 +60,19 @@ svg.scatter-plot {
   &:hover {
     cursor: pointer;
     pointer-events: bounding-box;
+  }
+}
+
+#banner {
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#resume-svg {
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }

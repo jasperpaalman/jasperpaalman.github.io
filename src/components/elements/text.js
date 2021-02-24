@@ -1,6 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { Header } from 'semantic-ui-react';
+import { Header, Divider } from 'semantic-ui-react';
 
 const TextBlock = ({ children, style }) => (
     <div
@@ -19,16 +19,36 @@ const TextBlock = ({ children, style }) => (
     </div>
 );
 
+const SectionText = ({ children, style }) => (
+    <div
+        style={{
+            fontSize: '14pt',
+            marginBottom: '16pt',
+            textAlign: 'justify',
+            lineHeight: '2em',
+            borderTop: '2px solid #271d66',
+            borderBottom: '2px solid #271d66',
+            padding: '16pt',
+            ...(style || {}),
+        }}
+    >
+        {children}
+    </div>
+);
+
 const CustomHeader = ({ children }) => (
     <Header
         content={children}
         style={{
             textAlign: 'center',
-            paddingTop: '32pt',
             color: '#271d66',
             fontSize: '24pt',
         }}
     />
+);
+
+const Stress = ({ children }) => (
+    <span style={{ color: '#51D5FF' }}>{children}</span>
 );
 
 const Marked = ({ children }) => (
@@ -37,16 +57,22 @@ const Marked = ({ children }) => (
 
 const SectionHeader = ({ children }) => (
     <div>
+        <hr
+            style={{
+                backgroundColor: '#345A66',
+                height: '5pt',
+            }}
+        />
         <Header
             content={children}
             style={{
                 textAlign: 'center',
-                paddingTop: '32pt',
-                color: 'rgba(0, 0, 0, 0.87)',
+                paddingTop: '16pt',
+                paddingBottom: '16pt',
+                color: '#345A66',
                 fontSize: '30pt',
             }}
         />
-        <hr />
     </div>
 );
 
@@ -56,15 +82,20 @@ const SubSectionHeader = ({ children }) => (
             content={children}
             style={{
                 textAlign: 'center',
-                paddingTop: '24pt',
-                color: 'rgba(0, 0, 0, 0.87)',
-                fontSize: '24pt',
+                paddingTop: '10pt',
+                paddingBottom: '10pt',
+                color: '#345A66',
+                fontSize: '20pt',
             }}
         />
     </div>
 );
 
 Marked.prototype.propTypes = {
+    children: PropTypes.any.isRequired,
+};
+
+Stress.prototype.propTypes = {
     children: PropTypes.any.isRequired,
 };
 
@@ -81,6 +112,15 @@ TextBlock.prototype.defaultProps = {
     style: null,
 };
 
+SectionText.prototype.propTypes = {
+    children: PropTypes.any.isRequired,
+    style: PropTypes.any,
+};
+
+SectionText.prototype.defaultProps = {
+    style: null,
+};
+
 SectionHeader.prototype.propTypes = {
     children: PropTypes.any.isRequired,
 };
@@ -90,5 +130,11 @@ SubSectionHeader.prototype.propTypes = {
 };
 
 export {
-    Marked, TextBlock, CustomHeader, SectionHeader, SubSectionHeader,
+    Marked,
+    Stress,
+    TextBlock,
+    CustomHeader,
+    SectionText,
+    SectionHeader,
+    SubSectionHeader,
 };

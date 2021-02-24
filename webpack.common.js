@@ -9,7 +9,7 @@ module.exports = {
 
   module: {
     rules: [
-      // File loader for background etc.
+      // File loader for images
       {
         test: /\.(png|jpg)$/,
         include: path.join(__dirname, "src/assets/image"),
@@ -57,7 +57,7 @@ module.exports = {
         loader: "babel-loader",
       },
 
-      // Send svg to svg-react
+      // Load raw svg's
       {
         test: /\.svg$/,
         exclude: /node_modules/,

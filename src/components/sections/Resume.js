@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
-import { SectionHeader } from '../elements/text';
+import { SectionHeader, SectionText, Stress } from '../elements/text';
 import ResumeSVG from '../../assets/image/resume.svg';
 import './Resume.scss';
 
@@ -25,6 +25,18 @@ export default class Resume extends Component {
             <div id="resume">
                 <SectionHeader>Resume</SectionHeader>
                 <Container>
+                    <SectionText>
+                        <p>
+                            Below find my resume. Follow the links to
+                            {' '}
+                            <Stress>Github</Stress>
+                            {' '}
+                            or
+                            {' '}
+                            <Stress>LinkedIn</Stress>
+                            !
+                        </p>
+                    </SectionText>
                     <div id="resume-svg">
                         <span dangerouslySetInnerHTML={{ __html: ResumeSVG }} />
                     </div>
