@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Image } from 'semantic-ui-react';
 
+import NeuralNetwork from '../components/layout/NeuralNetwork';
+
 import TopMenu from '../components/layout/TopMenu';
 import Home from '../components/sections/Home';
 import About from '../components/sections/About';
@@ -35,6 +37,12 @@ export default class Page extends Component {
               <Home
                   onHeaderVisible={this.unStickTopMenu}
                   onHeaderPassed={this.stickTopMenu}
+              />
+              <NeuralNetwork
+                  radius={30}
+                  layerNodes={[4, 3, 8, 5, 2]}
+                  animationDuration={1000}
+                  style={{ height: '50vh', width: '100%', margin: '16pt 0' }}
               />
               <About />
               <Resume />
