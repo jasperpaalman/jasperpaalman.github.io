@@ -27,12 +27,11 @@ export default class Resume extends Component {
                 <Container>
                     <SectionText>
                         <p>
-                            Below find my resume. Follow the links to
+                            Find my summarized resume below. Follow the links to
                             {' '}
                             <Stress>Github</Stress>
                             {' '}
                             or
-                            {' '}
                             <Stress>LinkedIn</Stress>
                             !
                         </p>

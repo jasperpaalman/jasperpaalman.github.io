@@ -17,11 +17,9 @@ export default class ClubAnalysis extends Component {
 
   Text = () => (
       <TextBlock>
-          By now the clubs should be somewhat familiar and you might be interested
-          in a single club’s performance in a certain season. We created a graph
-          that allows you to see everything you need to know in a season! You can
-          see the relative points of each club in a season. Each vertical
-          demonstrates a set of weekly matches. When you
+          We created a graph that allows you to see everything you need to know in a
+          season! You can see the relative points of each club in a season. Each
+          vertical demonstrates a set of weekly matches. When you
           {' '}
           <Marked>click a club icon</Marked>
           {' '}
@@ -39,7 +37,14 @@ export default class ClubAnalysis extends Component {
               draw
           </span>
           ), the vertical lines show the difference in points, and above each match
-          you can see the difference in ranking.
+          you can see the changes in ranking (when a club is clicked on). Use the
+          navigation buttons to alternate between different seasons to even view a
+          club's performance over the years! You can also
+          {' '}
+          <Marked>hover</Marked>
+          {' '}
+          over a club or a line to have a quick overview of the performance of a
+          club over time during a competition.
       </TextBlock>
   );
 

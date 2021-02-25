@@ -30,7 +30,12 @@ const items = [
         key: 'projects',
         name: 'projects',
         text: 'Projects',
-        subitems: [{ key: 'eredivisie', name: 'eredivisie', text: 'Eredivisie' }],
+        subitems: [
+            { key: 'eredivisie', name: 'eredivisie', text: 'Eredivisie' },
+            { key: 'corona', name: 'corona', text: 'Corona' },
+            { key: 'webscraper', name: 'webscraper', text: 'Webscraper' },
+            { key: 'pagemonitor', name: 'pagemonitor', text: 'Page Monitor' },
+        ],
     },
 ];
 
@@ -49,7 +54,6 @@ const TopMenu = ({ fixed }) => {
     const height = '32pt';
     const margin = '8pt';
     const menuItemStyle = {
-        backgroundColor: 'transparent',
         lineHeight: height,
         padding: '8pt',
         margin: '0',
@@ -74,6 +78,17 @@ const TopMenu = ({ fixed }) => {
             height: '64pt',
             transition: `height ${transitionStyle}`,
         },
+        dropDownItemStyle: {
+            backgroundColor: 'transparent',
+            height,
+            padding: '0',
+            margin: '0',
+            fontSize: '12pt',
+            color: 'rgb(255,255,255)',
+            transition: `color ${transitionStyle}`,
+            fontWeight: '300',
+            fontFamily: "'roboto', sans-serif",
+        },
     };
 
     if (fixed) {
@@ -81,6 +96,9 @@ const TopMenu = ({ fixed }) => {
         style.style = Object.assign(style.style, {
             backgroundColor: 'rgba(255,255,255,1)',
             boxShadow: getShadow(3, true),
+            color: 'rgb(0, 0, 0)',
+        });
+        style.dropDownItemStyle = Object.assign(style.dropDownItemStyle, {
             color: 'rgb(0, 0, 0)',
         });
         style.logoStyle = Object.assign(style.logoStyle, {
@@ -115,7 +133,7 @@ const TopMenu = ({ fixed }) => {
                             {items.map((item) => {
                                 if ('subitems' in item) {
                                     return (
-                                        <Menu.Item>
+                                        <Menu.Item key={item.name}>
                                             <Button.Group>
                                                 <Button
                                                     key={item.name}
@@ -125,6 +143,7 @@ const TopMenu = ({ fixed }) => {
                                                             .querySelector(`#${item.name}`)
                                                             .scrollIntoView({ behavior: 'smooth' });
                                                     }}
+                                                    style={style.dropDownItemStyle}
                                                 >
                                                     {item.text}
                                                 </Button>
@@ -132,6 +151,9 @@ const TopMenu = ({ fixed }) => {
                                                     className="button icon"
                                                     floating
                                                     trigger={<></>}
+                                                    style={Object.assign(style.dropDownItemStyle, {
+                                                        padding: '4pt',
+                                                    })}
                                                 >
                                                     <Dropdown.Menu>
                                                         {item.subitems.map((subitem) => (

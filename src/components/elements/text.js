@@ -23,11 +23,11 @@ const SectionText = ({ children, style }) => (
     <div
         style={{
             fontSize: '14pt',
-            marginBottom: '16pt',
+            marginBottom: '25pt',
             textAlign: 'justify',
             lineHeight: '2em',
-            borderTop: '2px solid #271d66',
-            borderBottom: '2px solid #271d66',
+            borderTop: '2px solid #345A66',
+            borderBottom: '2px solid #345A66',
             padding: '16pt',
             ...(style || {}),
         }}
@@ -59,16 +59,18 @@ const SectionHeader = ({ children }) => (
     <div>
         <hr
             style={{
-                backgroundColor: '#345A66',
+                backgroundColor: '#51D5FF',
+                color: '#51D5FF',
                 height: '5pt',
+                opacity: 0.3,
             }}
         />
         <Header
             content={children}
             style={{
                 textAlign: 'center',
-                paddingTop: '16pt',
-                paddingBottom: '16pt',
+                paddingTop: '25pt',
+                paddingBottom: '15pt',
                 color: '#345A66',
                 fontSize: '30pt',
             }}
@@ -82,10 +84,10 @@ const SubSectionHeader = ({ children }) => (
             content={children}
             style={{
                 textAlign: 'center',
-                paddingTop: '10pt',
-                paddingBottom: '10pt',
+                paddingTop: '20pt',
+                paddingBottom: '20pt',
                 color: '#345A66',
-                fontSize: '20pt',
+                fontSize: '18pt',
             }}
         />
     </div>

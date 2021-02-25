@@ -20,11 +20,13 @@ const About = () => (
                     interest lies in the development of
                     {' '}
                     <Stress>end-to-end products</Stress>
-                    , with potientally a data
-                    influence. Projects that I've completed over time highlight for me
-                    that various domains can benefit from data products and
-                    digitalization. Currently I'm working on extending my software
-                    engineering skills in order to realize lasting products.
+                    , with potientally a data influence.
+                    <br />
+                    <br />
+                    Projects that I've completed over time highlight for me that various
+                    domains can benefit from data products and digitalization. Currently
+                    I'm working on extending my software engineering skills in order to
+                    realize lasting products.
                     {' '}
                 </p>
             </SectionText>
