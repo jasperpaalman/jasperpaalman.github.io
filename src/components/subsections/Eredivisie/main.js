@@ -18,7 +18,7 @@ const Eredivisie = () => (
                     offers basically an
                     unbounded level of flexibility it was opted for to serve as the base.
                     After laborous work the result was unique, highly interactive
-                    visualizations. It is connected to a webscraper, so with every reload
+                    visualizations. It is connected to a webscraper, so with every update
                     new information becomes available!
                 </p>
             </SectionText>

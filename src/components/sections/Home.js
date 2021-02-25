@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Visibility } from 'semantic-ui-react';
 import BannerSVG from '../../assets/image/home_banner.svg';

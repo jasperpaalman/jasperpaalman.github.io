@@ -1,6 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { Header, Divider } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 
 const TextBlock = ({ children, style }) => (
     <div
