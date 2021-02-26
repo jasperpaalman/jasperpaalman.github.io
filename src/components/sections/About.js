@@ -26,8 +26,18 @@ const About = () => (
                     Projects that I've completed over time highlight for me that various
                     domains can benefit from data products and digitalization. Currently
                     I'm working on extending my software engineering skills in order to
-                    realize lasting products.
+                    realize lasting products. Main areas of interest currently lie in
                     {' '}
+                    <Stress>web-application development</Stress>
+                    {' '}
+                    and working in the
+                    {' '}
+                    <Stress>cloud</Stress>
+                    .
+                    <br />
+                    <br />
+                    Check out my resume and some of the projects that I have worked on
+                    below 😊.
                 </p>
             </SectionText>
         </Container>

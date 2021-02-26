@@ -1,6 +1,9 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
+
 import { SectionHeader, SectionText, Stress } from '../elements/text';
+
+import './Projects.scss';
 
 import Eredivisie from '../subsections/Eredivisie/main';
 import Corona from '../subsections/Corona/main';

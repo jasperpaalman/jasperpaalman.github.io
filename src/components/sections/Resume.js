@@ -27,18 +27,36 @@ export default class Resume extends Component {
                 <Container>
                     <SectionText>
                         <p>
-                            Find my summarized resume below. Follow the links to
+                            Here I have summarized my resume. It includes a selection of
+                            Personal Information, Skills, Education, Work Experience and
+                            Additional Activites. For convenience I have linked complementary
+                            resources such as
                             {' '}
                             <Stress>Github</Stress>
                             {' '}
-                            or
-                            <Stress>LinkedIn</Stress>
-                            !
+                            and
+                            <Stress> LinkedIn</Stress>
+                            .
                         </p>
                     </SectionText>
                     <div id="resume-svg">
                         <span dangerouslySetInnerHTML={{ __html: ResumeSVG }} />
                     </div>
+                    <SectionText>
+                        <p>
+                            Additionarlly, as part of my
+                            {' '}
+                            <Stress>thesis</Stress>
+                            {' '}
+                            I have
+                            performed research on the classification of very short texts with
+                            the use of semantic information. It has been published in RANLP
+                            2019 and can be found
+                            {' '}
+                            <a href="https://www.aclweb.org/anthology/R19-1102.pdf">here</a>
+                            .
+                        </p>
+                    </SectionText>
                 </Container>
             </div>
         );
