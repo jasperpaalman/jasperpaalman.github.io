@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 
 import { Image } from 'semantic-ui-react';
 
-import NeuralNetwork from '../components/layout/NeuralNetwork';
+import BasicBlock from '../elements/block';
 
-import TopMenu from '../components/layout/TopMenu';
-import Home from '../components/sections/Home';
-import About from '../components/sections/About';
-import Resume from '../components/sections/Resume';
-import Projects from '../components/sections/Projects';
+import NeuralNetwork from '../layout/NeuralNetwork';
+import Line from '../layout/Line';
+
+import TopMenu from '../layout/TopMenu';
+import Home from '../sections/Home';
+import About from '../sections/About';
+import Resume from '../sections/Resume';
+import Projects from '../sections/Projects';
 
 export default class Page extends Component {
     constructor(props) {
@@ -42,15 +45,13 @@ export default class Page extends Component {
                   radius={30}
                   layerNodes={[4, 3, 8, 5, 2]}
                   animationDuration={1000}
-                  style={{ height: '50vh', width: '100%', margin: '16pt 0' }}
               />
               <About />
+              <BasicBlock />
               <Resume />
+              <Line />
               <Projects />
-              <Image
-                  src="/static/image/sections/section1.png"
-                  style={{ width: '100%' }}
-              />
+              <Image src="/static/image/sections/end.png" style={{ width: '100%' }} />
           </div>
       );
   };

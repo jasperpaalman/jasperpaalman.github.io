@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
-import Page from './views/Page';
+import Page from './components/views/Page';
 
 const App = () => (
     <Router>
