@@ -33,15 +33,15 @@ const PageMonitor = () => (
             </SectionText>
         </Container>
         <ReactPlayer
-            style={{ margin: 'auto' }}
+            className="video-container"
+            width="100%"
+            height="100%"
             controls
-            config={{
-                youtube: {
-                    playerVars: { fs: 0 },
-                },
-            }}
-            width="1200px"
-            height="675px"
+            // config={{
+            //     youtube: {
+            //         playerVars: { fs: 0 },
+            //     },
+            // }}
             url="https://youtu.be/rIQXvGRobec"
         />
     </div>

@@ -9,17 +9,16 @@ const Corona = () => (
         <Container style={{ width: '40%' }}>
             <SectionText>
                 <p>
-                    When the second corona wave was about to hit, I made a visual
+                    When the second corona wave was building up, I made a visual
                     representation of the daily number of
                     {' '}
                     <Stress>positive tests</Stress>
                     {' '}
                     in the Netherlands. It was a project I initiated to experiment with
-                    open-source data in the context of a visualization type. It showcases
-                    the relative number of positive tests over time. It highlighted for me
-                    that the restrictions would have to be re-introduced in order to stop
-                    exponential growth. In any case it proved to be an interesting story
-                    telling technique.
+                    open-source data and a distinctive visualization type. It showcases
+                    the relative number of positive tests over time. It proved to be an
+                    impactful way of representing data, with new posibilities of detecting
+                    trends over time.
                     <br />
                     <br />
                     <Stress>Note:</Stress>
@@ -30,15 +29,15 @@ const Corona = () => (
             </SectionText>
         </Container>
         <ReactPlayer
-            style={{ margin: 'auto' }}
+            className="video-container"
+            width="100%"
+            height="100%"
             controls
-            config={{
-                youtube: {
-                    playerVars: { fs: 0 },
-                },
-            }}
-            width="1200px"
-            height="675px"
+            // config={{
+            //     youtube: {
+            //         playerVars: { fs: 0 },
+            //     },
+            // }}
             url="https://youtu.be/T8T-TXT1DKE"
         />
     </div>

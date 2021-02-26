@@ -17,8 +17,8 @@ const Webscraper = () => (
                     open-source data can be beneficial to the
                     <Stress> performance</Stress>
                     {' '}
-                    of a machine learning model or it simply
-                    offers information as is.
+                    of a machine learning model or it can
+                    simply offer information as is.
                     <br />
                     <br />
                     With that said, it can be difficult to scale your webscraper when
@@ -30,7 +30,7 @@ const Webscraper = () => (
                     contents. Recursively searching such a website would then ideally be
                     executed
                     <Stress> in parallel</Stress>
-                    , by using threads.
+                    .
                     <br />
                     <br />
                     Based on these challenges I have created a webscraper that can collect
@@ -39,8 +39,7 @@ const Webscraper = () => (
                     <Stress>simultaneously</Stress>
                     . In addition, a feature is added that can recursively collect data by
                     following urls on the same domain, when given a starting url as input.
-                    This module is flexible and can be integrated in numerous
-                    applications.
+                    This module is flexible and can be integrated in various applications.
                     <br />
                     <br />
                     The example below shows a recursive search with depth 1 on a Wikipedia
@@ -53,15 +52,15 @@ const Webscraper = () => (
             </SectionText>
         </Container>
         <ReactPlayer
-            style={{ margin: 'auto' }}
+            className="video-container"
+            width="100%"
+            height="100%"
             controls
-            config={{
-                youtube: {
-                    playerVars: { fs: 0 },
-                },
-            }}
-            width="1200px"
-            height="675px"
+            // config={{
+            //     youtube: {
+            //         playerVars: { fs: 0 },
+            //     },
+            // }}
             url="https://youtu.be/j4OioiGzs3Q"
         />
     </div>
