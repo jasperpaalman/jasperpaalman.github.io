@@ -1,25 +1,25 @@
 import * as d3 from 'd3';
 import * as PropTypes from 'prop-types';
 import D3Component from './D3Component';
-import './NeuralNetworkPlot.scss';
+import './NeuralNetworkAnimation.scss';
+import { lightBlue } from '../../theme';
 
-export default class NeuralNetworkPlot extends D3Component {
+export default class NeuralNetworkAnimation extends D3Component {
   static propTypes = {
-      radius: PropTypes.any.isRequired,
-      layerNodes: PropTypes.any.isRequired,
       animationDuration: PropTypes.any.isRequired,
+      active: PropTypes.any.isRequired,
   };
 
   constructor(props) {
       super(props);
       this.state = {
-          margin: {
-              top: 40,
-              right: 150,
-              bottom: 40,
-              left: 150,
+          marginRel: {
+              top: 10,
+              right: 15,
+              bottom: 10,
+              left: 10,
           },
-          active: false,
+          plotted: false,
       };
   }
 
@@ -61,8 +61,24 @@ export default class NeuralNetworkPlot extends D3Component {
   };
 
   plotNetwork = (svg, width, height) => {
-      const { margin } = this.state;
-      const { radius, layerNodes, animationDuration } = this.props;
+      const { marginRel } = this.state;
+
+      const margin = {
+          top: (marginRel.top / 100) * height,
+          right: (marginRel.right / 100) * width,
+          bottom: (marginRel.bottom / 100) * height,
+          left: (marginRel.left / 100) * width,
+      };
+
+      const { animationDuration } = this.props;
+
+      // randomly generated N = 40 length array 0 <= A[N] <= 39
+      const layerNodes = Array.from(
+          { length: 5 },
+          () => Math.floor(Math.random() * 5) + 2,
+      );
+
+      const radius = height / 15;
 
       this.width = width - margin.left - margin.right;
       this.height = height - margin.top - margin.bottom;
@@ -71,7 +87,7 @@ export default class NeuralNetworkPlot extends D3Component {
 
       const main = svg
           .append('g')
-          .attr('id', 'network')
+          .attr('id', 'networkAnimation')
           .attr('width', this.width)
           .attr('height', this.height)
           .attr('transform', `translate(${margin.left}, ${margin.top})`);
@@ -161,6 +177,53 @@ export default class NeuralNetworkPlot extends D3Component {
               });
           }
       });
+
+      // Restart
+      const restartButton = main.append('g').attr('class', 'restart-button');
+
+      const buttonWidth = 40;
+      const buttonHeight = 20;
+      const buttonOffset = margin.right / 4;
+
+      restartButton
+          .append('rect')
+          .attr('class', 'restart-block')
+          .attr('x', this.width + buttonOffset)
+          .attr('y', this.height / 2 - buttonHeight / 2)
+          .attr('rx', 6)
+          .attr('ry', 6)
+          .attr('width', buttonWidth)
+          .attr('height', buttonHeight)
+          .style('fill', `${lightBlue}`);
+
+      restartButton
+          .append('text')
+          .attr('class', 'restart-text')
+          .attr('x', this.width + buttonOffset + buttonWidth / 2)
+          .attr('y', this.height / 2)
+          .text('Restart')
+          .attr('dominant-baseline', 'central')
+          .style('text-anchor', 'middle')
+          .style('font', '10px sans-serif')
+          .style('fill', 'white');
+
+      restartButton.on('click', this.updateDimensions);
+  };
+
+  /** @override   */
+  updateDimensions = () => {
+      // Clear content
+      const { id } = this;
+      // eslint-disable-next-line
+    const svg = document.getElementById(id);
+      if (svg) {
+          svg.innerHTML = '';
+      }
+      // reset plotted state
+      this.setState({ plotted: false });
+
+      // Redraw
+      this.updateDrawWrapper();
   };
 
   /** @override   */
@@ -168,8 +231,11 @@ export default class NeuralNetworkPlot extends D3Component {
 
   /**  @override */
   updateDraw = (svg, width, height) => {
-      const { active } = this.state;
-      if (active) {
+      const { active } = this.props;
+      const { plotted } = this.state;
+
+      if (active && !plotted) {
+          this.setState({ plotted: true });
           this.plotNetwork(svg, width, height);
       }
   };
