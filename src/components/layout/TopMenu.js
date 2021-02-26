@@ -51,7 +51,7 @@ const homeAnchor = '/#home';
 
 const TopMenu = ({ fixed }) => {
     const transitionStyle = '.6s ease';
-    const height = '32pt';
+    const height = '4vh';
     const margin = '8pt';
     const menuItemStyle = {
         lineHeight: height,
@@ -75,7 +75,7 @@ const TopMenu = ({ fixed }) => {
         },
         logoStyle: {
             margin,
-            height: '64pt',
+            height: '8vh',
             transition: `height ${transitionStyle}`,
         },
         dropDownItemStyle: {
@@ -102,7 +102,7 @@ const TopMenu = ({ fixed }) => {
             color: 'rgb(0, 0, 0)',
         });
         style.logoStyle = Object.assign(style.logoStyle, {
-            height: '32pt',
+            height: '4vh',
         });
     }
 
@@ -160,14 +160,13 @@ const TopMenu = ({ fixed }) => {
                                                             <Dropdown.Item
                                                                 key={subitem.name}
                                                                 name={subitem.name}
+                                                                text={subitem.text}
                                                                 onClick={() => {
                                                                     document
                                                                         .querySelector(`#${subitem.name}`)
                                                                         .scrollIntoView({ behavior: 'smooth' });
                                                                 }}
-                                                            >
-                                                                {subitem.text}
-                                                            </Dropdown.Item>
+                                                            />
                                                         ))}
                                                     </Dropdown.Menu>
                                                 </Dropdown>
@@ -197,17 +196,20 @@ const TopMenu = ({ fixed }) => {
                                     floating
                                     trigger={<Icon name="sidebar" />}
                                     className={`menu-dropdown ${fixed ? ' fixed' : ' '}`}
+                                    style={Object.assign(style.dropDownItemStyle, {
+                                        padding: '4pt',
+                                    })}
                                 >
                                     <Dropdown.Menu>
                                         {items.map((item) => (
                                             <Dropdown.Item
                                                 key={item.name}
-                                                as="a"
+                                                name={item.name}
                                                 text={item.text}
-                                                href={item.href}
-                                                style={{
-                                                    lineHeight: '1rem !important',
-                                                    fontSize: '1rem !important',
+                                                onClick={() => {
+                                                    document
+                                                        .querySelector(`#${item.name}`)
+                                                        .scrollIntoView({ behavior: 'smooth' });
                                                 }}
                                             />
                                         ))}
