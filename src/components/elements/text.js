@@ -23,6 +23,7 @@ const SectionText = ({ children, style }) => (
     <div
         style={{
             fontSize: '14pt',
+            marginTop: '15pt',
             marginBottom: '25pt',
             textAlign: 'justify',
             lineHeight: '2em',
@@ -57,20 +58,11 @@ const Marked = ({ children }) => (
 
 const SectionHeader = ({ children }) => (
     <div>
-        <hr
-            style={{
-                backgroundColor: '#51D5FF',
-                color: '#51D5FF',
-                height: '5pt',
-                opacity: 0.3,
-            }}
-        />
         <Header
             content={children}
             style={{
                 textAlign: 'center',
                 paddingTop: '25pt',
-                paddingBottom: '15pt',
                 color: '#345A66',
                 fontSize: '30pt',
             }}
