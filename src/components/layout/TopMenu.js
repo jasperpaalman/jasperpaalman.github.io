@@ -51,11 +51,13 @@ const homeAnchor = '/#home';
 
 const TopMenu = ({ fixed }) => {
     const transitionStyle = '.6s ease';
-    const height = '4vh';
-    const margin = '8pt';
+    const height = 4; // vh
+    // const margin = '4pt';
+    const padding = '8pt';
+
     const menuItemStyle = {
-        lineHeight: height,
-        padding: '8pt',
+        lineHeight: `${height}vh`,
+        padding,
         margin: '0',
         fontSize: '12pt',
         color: 'inherit',
@@ -66,22 +68,22 @@ const TopMenu = ({ fixed }) => {
 
     const style = {
         fixed: 'top',
-        inverted: false,
         style: {
             backgroundColor: 'rgba(255, 255, 255, 0)',
             color: 'rgb(255,255,255)',
             borderBottom: 'none',
             transition: `background-color ${transitionStyle}`,
+            overflow: 'visible',
         },
         logoStyle: {
-            margin,
-            height: '8vh',
+            margin: padding,
+            height: `${height * 2}vh`,
             transition: `height ${transitionStyle}`,
         },
         dropDownItemStyle: {
             backgroundColor: 'transparent',
-            height,
-            padding: '0',
+            height: `${height}vh`,
+            padding: '0pt',
             margin: '0',
             fontSize: '12pt',
             color: 'rgb(255,255,255)',
@@ -92,7 +94,6 @@ const TopMenu = ({ fixed }) => {
     };
 
     if (fixed) {
-        style.inverted = false;
         style.style = Object.assign(style.style, {
             backgroundColor: 'rgba(255,255,255,1)',
             boxShadow: getShadow(3, true),
@@ -102,21 +103,16 @@ const TopMenu = ({ fixed }) => {
             color: 'rgb(0, 0, 0)',
         });
         style.logoStyle = Object.assign(style.logoStyle, {
-            height: '4vh',
+            height: `${height}vh`,
         });
     }
 
     return (
-        <Menu
-            pointing
-            secondary
-            inverted={style.inverted}
-            fixed={style.fixed}
-            style={style.style}
-        >
+        <Menu pointing secondary fixed={style.fixed} style={style.style}>
             <Container>
                 <Menu.Menu>
                     <Image
+                        floated
                         alt="Logo Dark"
                         src="/static/image/menu/logo_dark.png"
                         style={style.logoStyle}
@@ -133,7 +129,7 @@ const TopMenu = ({ fixed }) => {
                             {items.map((item) => {
                                 if ('subitems' in item) {
                                     return (
-                                        <Menu.Item key={item.name}>
+                                        <Menu.Item key={item.name} style={menuItemStyle}>
                                             <Button.Group>
                                                 <Button
                                                     key={item.name}
@@ -147,14 +143,7 @@ const TopMenu = ({ fixed }) => {
                                                 >
                                                     {item.text}
                                                 </Button>
-                                                <Dropdown
-                                                    className="button icon"
-                                                    floating
-                                                    trigger={<></>}
-                                                    style={Object.assign(style.dropDownItemStyle, {
-                                                        padding: '4pt',
-                                                    })}
-                                                >
+                                                <Dropdown floating style={style.dropDownItemStyle}>
                                                     <Dropdown.Menu>
                                                         {item.subitems.map((subitem) => (
                                                             <Dropdown.Item
@@ -191,14 +180,12 @@ const TopMenu = ({ fixed }) => {
                             })}
                         </Desktop>
                         <Mobile>
-                            <Menu.Item>
+                            <Menu.Item style={menuItemStyle}>
                                 <Dropdown
                                     floating
                                     trigger={<Icon name="sidebar" />}
                                     className={`menu-dropdown ${fixed ? ' fixed' : ' '}`}
-                                    style={Object.assign(style.dropDownItemStyle, {
-                                        padding: '4pt',
-                                    })}
+                                    style={style.dropDownItemStyle}
                                 >
                                     <Dropdown.Menu>
                                         {items.map((item) => (
