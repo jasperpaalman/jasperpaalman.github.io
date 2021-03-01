@@ -326,7 +326,7 @@ for season, season_df in points_df.groupby(['Seizoen eind']):
     season_point_accumulation[season]['KPI']['Overall'] = get_kpi(season_df)
     season_point_accumulation[season]['Extent'] = season_extent[season]
 
-with open('src/static/season_point_accumulation.json', 'w') as outfile:
+with open('public/static/data/season_point_accumulation.json', 'w') as outfile:
     json.dump(season_point_accumulation, outfile)
 
 ######################
@@ -381,5 +381,5 @@ points_accumulated = season_points[['Club', 'Season rank', 'Season score', 'Fina
 
 # Output
 
-with open('src/static/points_accumulated.json', 'w') as outfile:
+with open('public/static/data/points_accumulated.json', 'w') as outfile:
     json.dump(points_accumulated, outfile)
