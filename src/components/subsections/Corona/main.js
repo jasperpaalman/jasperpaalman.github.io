@@ -30,6 +30,7 @@ const Corona = () => (
         </Container>
         <ReactPlayer
             className="video-container"
+            style={{ marginBottom: '25pt' }}
             width="100%"
             height="100%"
             controls

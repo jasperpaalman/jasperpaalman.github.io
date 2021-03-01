@@ -23,7 +23,7 @@ const SectionText = ({ children, style }) => (
     <div
         style={{
             fontSize: '14pt',
-            marginTop: '15pt',
+            // marginTop: '15pt',
             marginBottom: '25pt',
             textAlign: 'justify',
             lineHeight: '2em',
@@ -63,6 +63,7 @@ const SectionHeader = ({ children }) => (
             style={{
                 textAlign: 'center',
                 paddingTop: '25pt',
+                paddingBottom: '25pt',
                 color: '#345A66',
                 fontSize: '30pt',
             }}

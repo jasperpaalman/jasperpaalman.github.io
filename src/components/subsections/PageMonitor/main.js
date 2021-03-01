@@ -36,6 +36,7 @@ const PageMonitor = () => (
             className="video-container"
             width="100%"
             height="100%"
+            style={{ marginBottom: '25pt' }}
             controls
             // config={{
             //     youtube: {
