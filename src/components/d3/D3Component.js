@@ -21,6 +21,8 @@ export default class D3Component extends PureComponent {
 
   componentDidMount = () => {
       this.firstDrawWrapper();
+      // Get width on mount
+      this.widthOnMount = this.getWidth();
       // eslint-disable-next-line no-undef
       window.addEventListener('resize', this.updateDimensions);
   };
@@ -42,6 +44,15 @@ export default class D3Component extends PureComponent {
   getWidth = () => {
       const { myRef } = this;
       return myRef.current.clientWidth;
+  };
+
+  updateDimensionsWrapper = () => {
+      // Check if dimensions are truly changed
+      // (Mobile chrome triggers resize on scroll)
+
+      if (this.widthOnMount !== this.getWidth()) {
+          this.updateDimensions();
+      }
   };
 
   updateDimensions = () => {
