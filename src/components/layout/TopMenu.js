@@ -12,6 +12,8 @@ import * as PropTypes from 'prop-types';
 import Responsive from 'react-responsive';
 import { getShadow } from '../../theme';
 
+import scrollToElement from '../../utils/scrollToElement';
+
 const Desktop = (props) => <Responsive {...props} minWidth="50rem" />;
 const Mobile = (props) => <Responsive {...props} maxWidth="50rem" />;
 
@@ -112,14 +114,11 @@ const TopMenu = ({ fixed }) => {
             <Container>
                 <Menu.Menu>
                     <Image
-                        floated
                         alt="Logo Dark"
                         src="/static/image/menu/logo_dark.png"
                         style={style.logoStyle}
                         onClick={() => {
-                            document
-                                .querySelector('#home')
-                                .scrollIntoView({ behavior: 'smooth' });
+                            scrollToElement(document.querySelector('#home'));
                         }}
                     />
                 </Menu.Menu>
@@ -135,9 +134,9 @@ const TopMenu = ({ fixed }) => {
                                                     key={item.name}
                                                     name={item.name}
                                                     onClick={() => {
-                                                        document
-                                                            .querySelector(`#${item.name}`)
-                                                            .scrollIntoView({ behavior: 'smooth' });
+                                                        scrollToElement(
+                                                            document.querySelector(`#${item.name}`),
+                                                        );
                                                     }}
                                                     style={style.dropDownItemStyle}
                                                 >
@@ -151,9 +150,9 @@ const TopMenu = ({ fixed }) => {
                                                                 name={subitem.name}
                                                                 text={subitem.text}
                                                                 onClick={() => {
-                                                                    document
-                                                                        .querySelector(`#${subitem.name}`)
-                                                                        .scrollIntoView({ behavior: 'smooth' });
+                                                                    scrollToElement(
+                                                                        document.querySelector(`#${subitem.name}`),
+                                                                    );
                                                                 }}
                                                             />
                                                         ))}
@@ -169,9 +168,7 @@ const TopMenu = ({ fixed }) => {
                                         name={item.name}
                                         style={menuItemStyle}
                                         onClick={() => {
-                                            document
-                                                .querySelector(`#${item.name}`)
-                                                .scrollIntoView({ behavior: 'smooth' });
+                                            scrollToElement(document.querySelector(`#${item.name}`));
                                         }}
                                     >
                                         {item.text}
@@ -194,9 +191,9 @@ const TopMenu = ({ fixed }) => {
                                                 name={item.name}
                                                 text={item.text}
                                                 onClick={() => {
-                                                    document
-                                                        .querySelector(`#${item.name}`)
-                                                        .scrollIntoView({ behavior: 'smooth' });
+                                                    scrollToElement(
+                                                        document.querySelector(`#${item.name}`),
+                                                    );
                                                 }}
                                             />
                                         ))}
