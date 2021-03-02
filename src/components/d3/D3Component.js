@@ -21,10 +21,13 @@ export default class D3Component extends PureComponent {
 
   componentDidMount = () => {
       this.firstDrawWrapper();
-      // Get width on mount
-      this.widthOnMount = this.getWidth();
+
+      // Get width and height
+      this.width = this.getWidth();
+      this.height = this.getHeight();
+
       // eslint-disable-next-line no-undef
-      window.addEventListener('resize', this.updateDimensions);
+      window.addEventListener('resize', this.updateDimensionsWrapper);
   };
 
   componentDidUpdate = () => {
@@ -33,7 +36,7 @@ export default class D3Component extends PureComponent {
 
   componentWillUnmount = () => {
       // eslint-disable-next-line no-undef
-      window.removeEventListener('resize', this.updateDimensions);
+      window.removeEventListener('resize', this.updateDimensionsWrapper);
   };
 
   getHeight = () => {
@@ -50,7 +53,7 @@ export default class D3Component extends PureComponent {
       // Check if dimensions are truly changed
       // (Mobile chrome triggers resize on scroll)
 
-      if (this.widthOnMount !== this.getWidth()) {
+      if (this.width !== this.getWidth() || this.height !== this.getHeight()) {
           this.updateDimensions();
       }
   };
@@ -79,9 +82,16 @@ export default class D3Component extends PureComponent {
   };
 
   updateDrawWrapper = () => {
+      // Refs
       const { id, myRef } = this;
       const svg = d3.select(`#${id}`);
-      this.updateDraw(svg, myRef.current.clientWidth, myRef.current.clientHeight);
+
+      // Update width and height
+      this.width = this.getWidth();
+      this.height = this.getHeight();
+
+      // Update
+      this.updateDraw(svg, this.width, this.height);
   };
 
   /** @abstract */
