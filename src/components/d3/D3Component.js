@@ -53,7 +53,10 @@ export default class D3Component extends PureComponent {
       // Check if dimensions are truly changed
       // (Mobile chrome triggers resize on scroll)
 
-      if (this.width !== this.getWidth() || this.height !== this.getHeight()) {
+      if (
+          this.currentWidth !== this.getWidth()
+      || this.currentHeight !== this.getHeight()
+      ) {
           this.updateDimensions();
       }
   };
