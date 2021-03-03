@@ -23,8 +23,8 @@ export default class D3Component extends PureComponent {
       this.firstDrawWrapper();
 
       // Get width and height
-      this.width = this.getWidth();
-      this.height = this.getHeight();
+      this.currentWidth = this.getWidth();
+      this.currentHeight = this.getHeight();
 
       // eslint-disable-next-line no-undef
       window.addEventListener('resize', this.updateDimensionsWrapper);
@@ -87,11 +87,11 @@ export default class D3Component extends PureComponent {
       const svg = d3.select(`#${id}`);
 
       // Update width and height
-      this.width = this.getWidth();
-      this.height = this.getHeight();
+      this.currentWidth = this.getWidth();
+      this.currentHeight = this.getHeight();
 
       // Update
-      this.updateDraw(svg, this.width, this.height);
+      this.updateDraw(svg, this.currentWidth, this.currentHeight);
   };
 
   /** @abstract */
