@@ -58,11 +58,7 @@ export default class Page extends Component {
                   onHeaderVisible={this.unStickTopMenu}
                   onHeaderPassed={this.stickTopMenu}
               />
-              <NeuralNetwork
-                  radius={30}
-                  layerNodes={[4, 3, 8, 5, 2]}
-                  animationDuration={1000}
-              />
+              <NeuralNetwork />
               <About />
               <BasicBlock />
               <Resume />
