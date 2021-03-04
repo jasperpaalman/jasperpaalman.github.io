@@ -115,7 +115,7 @@ const TopMenu = ({ fixed }) => {
                 <Menu.Menu>
                     <Image
                         alt="Logo Dark"
-                        src="/static/image/menu/logo_dark.png"
+                        src="/static/image/layout/logo_dark.png"
                         style={style.logoStyle}
                         onClick={() => {
                             scrollToElement(document.querySelector('#home'));

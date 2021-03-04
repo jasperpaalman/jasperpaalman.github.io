@@ -42,7 +42,7 @@ export default class Resume extends Component {
                     <div id="resume-svg">
                         <span dangerouslySetInnerHTML={{ __html: ResumeSVG }} />
                     </div>
-                    <SectionText>
+                    <SectionText style={{ marginTop: '25pt' }}>
                         <p>
                             Additionarlly, as part of my
                             {' '}
