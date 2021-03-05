@@ -60,7 +60,13 @@ export default class NeuralNetworkAnimation extends D3Component {
       return yPos;
   };
 
+  getRandomArray = (n, start, stop) => Array.from(
+      { length: n },
+      () => Math.floor(Math.random() * (stop - start)) + start,
+  );
+
   plotNetwork = (svg, width, height) => {
+      // Based on state
       const { marginRel } = this.state;
 
       const margin = {
@@ -70,21 +76,25 @@ export default class NeuralNetworkAnimation extends D3Component {
           left: (marginRel.left / 100) * width,
       };
 
-      const { animationDuration } = this.props;
-
-      // randomly generated N = 40 length array 0 <= A[N] <= 39
-      const layerNodes = Array.from(
-          { length: 5 },
-          () => Math.floor(Math.random() * 5) + 2,
-      );
-
-      const radius = height / 15;
-
       this.width = width - margin.left - margin.right;
       this.height = height - margin.top - margin.bottom;
 
+      const nNodes = 5;
+      const layerNodes = this.getRandomArray(nNodes, 2, 7);
+
+      const radius = height / 15;
       const spacing = this.width / (layerNodes.length - 1);
 
+      // Based on props
+      const { animationDuration } = this.props;
+
+      const nodeDurationFactor = 0.5;
+      const lineDurationFactor = 0.5;
+
+      const nodeDuration = nodeDurationFactor * animationDuration;
+      const lineDuration = lineDurationFactor * animationDuration;
+
+      // Create SVGs
       const main = svg
           .append('g')
           .attr('id', 'networkAnimation')
@@ -124,16 +134,17 @@ export default class NeuralNetworkAnimation extends D3Component {
                   .attr('stroke-dasharray', `${totalLength} ${totalLength}`)
                   .attr('stroke-dashoffset', totalLength)
                   .transition()
-                  .duration(animationDuration / 2)
-                  .delay(i * animationDuration * 2)
-                  .ease(d3.easeLinear)
+                  .duration(nodeDuration * 0.6)
+                  .delay(i * animationDuration)
+                  .ease(d3.easeCircleIn)
                   .attr('stroke-dashoffset', 0);
 
               path
                   .transition()
-                  .duration(animationDuration / 2)
-                  .delay(i * animationDuration * 2 + 0.5 * animationDuration)
-                  .style('fill-opacity', 0.8);
+                  .duration(nodeDuration * 0.4)
+                  .delay(i * animationDuration + nodeDuration * 0.5)
+                  .ease(d3.easeCircleIn)
+                  .style('fill-opacity', 0.6);
           });
 
           if (i + 1 !== layerNodes.length) {
@@ -167,11 +178,8 @@ export default class NeuralNetworkAnimation extends D3Component {
                       .attr('stroke-dasharray', `${totalLength} ${totalLength}`)
                       .attr('stroke-dashoffset', totalLength)
                       .transition()
-                      .duration(
-                          (Math.random() * (0.15 - 0.99) + 0.99).toFixed(4)
-                * animationDuration,
-                      )
-                      .delay(i * animationDuration * 2 + animationDuration)
+                      .duration((Math.random() * (0.25 - 0.99) + 0.99) * lineDuration)
+                      .delay(i * animationDuration + nodeDuration)
                       .ease(d3.easeLinear)
                       .attr('stroke-dashoffset', 0);
               });

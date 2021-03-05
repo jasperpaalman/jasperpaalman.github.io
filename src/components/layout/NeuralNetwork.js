@@ -23,7 +23,7 @@ export default class NeuralNetwork extends Component {
               <Visibility onBottomVisible={this.activateAnimation}>
                   <BasicBlock />
                   <NeuralNetworkAnimation
-                      animationDuration={750}
+                      animationDuration={1500}
                       style={{ height: '30vh', width: '100%' }}
                       active={animationActive}
                   />

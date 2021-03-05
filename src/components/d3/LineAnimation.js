@@ -3,9 +3,11 @@ import * as PropTypes from 'prop-types';
 import D3Component from './D3Component';
 import './LineAnimation.scss';
 import { lightBlue } from '../../theme';
+import getRandomColor from '../../utils/getRandomColor';
 
 export default class LineAnimation extends D3Component {
   static propTypes = {
+      animationDuration: PropTypes.any.isRequired,
       active: PropTypes.any.isRequired,
   };
 
@@ -27,6 +29,7 @@ export default class LineAnimation extends D3Component {
       // Data
 
       const { axisMargin, marginRel } = this.state;
+      const { animationDuration } = this.props;
 
       const margin = {
           top: (marginRel.top / 100) * height,
@@ -38,8 +41,8 @@ export default class LineAnimation extends D3Component {
       this.width = width - margin.left - margin.right;
       this.height = height - margin.top - margin.bottom;
 
-      // randomly generated N = 40 length array 0 <= A[N] <= 39
-      const data = Array.from({ length: 20 }, () => Math.floor(Math.random() * 11));
+      const nDataPoints = 20;
+      const data = Array.from({ length: nDataPoints }, () => Math.floor(Math.random() * 11));
 
       // Set-up main canvas
 
@@ -54,7 +57,7 @@ export default class LineAnimation extends D3Component {
 
       const x = d3
           .scaleLinear()
-          .domain([0, data.length - 1])
+          .domain([0, nDataPoints - 1])
           .range([axisMargin, this.width - axisMargin]);
 
       const y = d3
@@ -64,7 +67,7 @@ export default class LineAnimation extends D3Component {
 
       const line = d3
           .line()
-          .curve(d3.curveCardinal)
+          .curve(d3.curveNatural)
           .x((d, i) => x(i))
           .y((d) => y(d));
 
@@ -96,8 +99,12 @@ export default class LineAnimation extends D3Component {
           .attr('r', 4)
           .attr('cx', (d, i) => x(i))
           .attr('cy', (d) => y(d))
-          .style('fill', 'white')
           .style('stroke-width', '1.5px')
+          .style('fill', 'white')
+          .style('stroke', 'white')
+          .transition()
+          .duration((d, i) => (animationDuration / nDataPoints) * i)
+          .ease(d3.easeExpIn)
           .style('stroke', `${lightBlue}`);
 
       // Animation
@@ -107,7 +114,7 @@ export default class LineAnimation extends D3Component {
           .attr('stroke-dasharray', `${totalLength} ${totalLength}`)
           .attr('stroke-dashoffset', totalLength)
           .transition()
-          .duration(2000)
+          .duration(animationDuration)
           .ease(d3.easeLinear)
           .attr('stroke-dashoffset', 0);
 
@@ -146,7 +153,7 @@ export default class LineAnimation extends D3Component {
               d3.select(event.currentTarget)
                   .transition()
                   .duration(500)
-                  .style('fill', `${lightBlue}`);
+                  .style('fill', getRandomColor());
           })
           .on('mouseout', (event) => {
               d3.select(event.currentTarget)

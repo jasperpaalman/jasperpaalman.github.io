@@ -24,6 +24,7 @@ export default class Line extends Component {
                   <BasicBlock />
                   <LineAnimation
                       style={{ height: '30vh', width: '100%' }}
+                      animationDuration={2000}
                       active={animationActive}
                   />
                   <BasicBlock />
