@@ -17,14 +17,17 @@ export default class D3Component extends PureComponent {
       const randomString = uuidv4();
       this.id = `svg-container-${randomString}`;
       this.myRef = React.createRef();
+      this.state = {
+          width: null,
+          height: null,
+      };
   }
 
   componentDidMount = () => {
       this.firstDrawWrapper();
 
-      // Get width and height
-      this.currentWidth = this.getWidth();
-      this.currentHeight = this.getHeight();
+      // Update width and height
+      this.updateStateSize();
 
       // eslint-disable-next-line no-undef
       window.addEventListener('resize', this.updateDimensionsWrapper);
@@ -37,6 +40,13 @@ export default class D3Component extends PureComponent {
   componentWillUnmount = () => {
       // eslint-disable-next-line no-undef
       window.removeEventListener('resize', this.updateDimensionsWrapper);
+  };
+
+  updateStateSize = () => {
+      this.setState({
+          width: this.getWidth(),
+          height: this.getHeight(),
+      });
   };
 
   getHeight = () => {
@@ -52,11 +62,10 @@ export default class D3Component extends PureComponent {
   updateDimensionsWrapper = () => {
       // Check if dimensions are truly changed
       // (Mobile chrome triggers resize on scroll)
+      const { width, height } = this.state;
 
-      if (
-          this.currentWidth !== this.getWidth()
-      || this.currentHeight !== this.getHeight()
-      ) {
+      if (width !== this.getWidth() || height !== this.getHeight()) {
+          this.updateStateSize();
           this.updateDimensions();
       }
   };
@@ -79,22 +88,20 @@ export default class D3Component extends PureComponent {
   };
 
   firstDrawWrapper = () => {
-      const { id, myRef } = this;
+      const { id } = this;
       const svg = d3.select(`#${id}`);
+
       this.firstDraw(svg, this.getWidth(), this.getHeight());
   };
 
   updateDrawWrapper = () => {
       // Refs
-      const { id, myRef } = this;
+      const { id } = this;
       const svg = d3.select(`#${id}`);
-
-      // Update width and height
-      this.currentWidth = this.getWidth();
-      this.currentHeight = this.getHeight();
+      const { width, height } = this.state;
 
       // Update
-      this.updateDraw(svg, this.currentWidth, this.currentHeight);
+      this.updateDraw(svg, width, height);
   };
 
   /** @abstract */
