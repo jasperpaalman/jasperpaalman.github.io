@@ -113,7 +113,7 @@ const TopMenu = ({ fixed }) => {
 
     return (
         <Menu pointing secondary fixed={style.fixed} style={style.style}>
-            <div id="collisionChart">
+            {/* <div id="collisionChart">
                 <CollisionChart
                     style={{
                         position: 'fixed',
@@ -121,7 +121,7 @@ const TopMenu = ({ fixed }) => {
                         height: '7vh',
                     }}
                 />
-            </div>
+            </div> */}
             <Container>
                 <Menu.Menu>
                     <Image
