@@ -12,6 +12,8 @@ import * as PropTypes from 'prop-types';
 import Responsive from 'react-responsive';
 import { getShadow } from '../../theme';
 
+import CollisionChart from '../d3/CollisionChart';
+
 import scrollToElement from '../../utils/scrollToElement';
 
 const Desktop = (props) => <Responsive {...props} minWidth="50rem" />;
@@ -111,6 +113,15 @@ const TopMenu = ({ fixed }) => {
 
     return (
         <Menu pointing secondary fixed={style.fixed} style={style.style}>
+            <div id="collisionChart">
+                <CollisionChart
+                    style={{
+                        position: 'fixed',
+                        width: '100%',
+                        height: '7vh',
+                    }}
+                />
+            </div>
             <Container>
                 <Menu.Menu>
                     <Image
