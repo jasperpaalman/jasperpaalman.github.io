@@ -113,13 +113,13 @@ const TopMenu = ({ fixed }) => {
 
     return (
         <Menu pointing secondary fixed={style.fixed} style={style.style}>
-            <CollisionChart
+            {/* <CollisionChart
                 style={{
                     position: 'fixed',
                     width: '100vw',
                     height: '7vh',
                 }}
-            />
+            /> */}
             <Container>
                 <Menu.Menu>
                     <Image
