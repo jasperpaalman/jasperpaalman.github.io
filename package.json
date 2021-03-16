@@ -28,7 +28,7 @@
     "build": "webpack --config webpack.prod.js --progress --color",
     "start": "webpack serve --config webpack.dev.js --open --progress --color",
     "fix-style": "eslint ./src/**/*.js --fix",
-    "scrape": "python scripts/scrape_eredivise_data.py"
+    "scrape": "pipenv run python scripts/scrape_eredivise_data.py"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.16",

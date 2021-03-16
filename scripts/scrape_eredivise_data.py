@@ -11,6 +11,7 @@ import json
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 import numpy as np
 import pandas as pd
@@ -22,7 +23,9 @@ import pandas as pd
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')  # don't open window
 
-driver = webdriver.Chrome(chrome_options=chrome_options)  # initiate driver
+# initiate driver
+driver = webdriver.Chrome(
+    ChromeDriverManager().install(), options=chrome_options)
 
 driver.get("http://www.eredivisiestats.nl/wedstrijden.php")
 driver.find_element_by_xpath(
