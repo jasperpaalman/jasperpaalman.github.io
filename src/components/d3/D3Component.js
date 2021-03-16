@@ -23,7 +23,7 @@ export default class D3Component extends PureComponent {
       };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
       this.firstDrawWrapper();
 
       // Update width and height
@@ -31,16 +31,16 @@ export default class D3Component extends PureComponent {
 
       // eslint-disable-next-line no-undef
       window.addEventListener('resize', this.updateDimensionsWrapper);
-  };
+  }
 
-  componentDidUpdate = () => {
+  componentDidUpdate() {
       this.delayedUpdate();
-  };
+  }
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
       // eslint-disable-next-line no-undef
       window.removeEventListener('resize', this.updateDimensionsWrapper);
-  };
+  }
 
   updateStateSize = () => {
       this.setState({
@@ -118,7 +118,12 @@ export default class D3Component extends PureComponent {
       const { id, myRef } = this;
       const { style } = this.props;
       return (
-          <svg id={id} style={{ overflow: 'visible', ...style }} ref={myRef} />
+          <svg
+              id={id}
+              className="d3plot"
+              style={{ overflow: 'visible', ...style }}
+              ref={myRef}
+          />
       );
   };
 }

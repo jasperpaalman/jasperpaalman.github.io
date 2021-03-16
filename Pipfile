@@ -12,6 +12,8 @@ beautifulsoup4 = "*"
 selenium = "*"
 pandas = "*"
 lxml = "*"
+xlrd = "*"
+openpyxl = "*"
 
 [dev-packages]
 

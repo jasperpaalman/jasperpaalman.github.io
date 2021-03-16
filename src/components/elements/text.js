@@ -1,6 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Header } from 'semantic-ui-react';
+import { lightBlue, darkBlue } from '../../theme';
 
 const TextBlock = ({ children, style }) => (
     <div
@@ -27,8 +28,8 @@ const SectionText = ({ children, style }) => (
             marginBottom: '25pt',
             textAlign: 'justify',
             lineHeight: '2em',
-            borderTop: '2px solid #345A66',
-            borderBottom: '2px solid #345A66',
+            borderTop: `2px solid ${darkBlue}`,
+            borderBottom: `2px solid ${darkBlue}`,
             padding: '16pt',
             ...(style || {}),
         }}
@@ -49,7 +50,7 @@ const CustomHeader = ({ children }) => (
 );
 
 const Stress = ({ children }) => (
-    <span style={{ color: '#51D5FF' }}>{children}</span>
+    <span style={{ color: `${lightBlue}` }}>{children}</span>
 );
 
 const Marked = ({ children }) => (
@@ -64,7 +65,7 @@ const SectionHeader = ({ children }) => (
                 textAlign: 'center',
                 paddingTop: '25pt',
                 paddingBottom: '25pt',
-                color: '#345A66',
+                color: `${darkBlue}`,
                 fontSize: '30pt',
             }}
         />
@@ -79,7 +80,7 @@ const SubSectionHeader = ({ children }) => (
                 textAlign: 'center',
                 paddingTop: '20pt',
                 paddingBottom: '20pt',
-                color: '#345A66',
+                color: `${darkBlue}`,
                 fontSize: '18pt',
             }}
         />

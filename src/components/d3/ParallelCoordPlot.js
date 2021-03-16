@@ -5,7 +5,7 @@ import D3Component from './D3Component';
 import './ParallelCoordPlot.scss';
 import toIcon from '../../utils/toIcon';
 
-export default class TimeLine extends D3Component {
+export default class ParallelCoordPlot extends D3Component {
   static propTypes = {
       data: PropTypes.any.isRequired,
       years: PropTypes.any.isRequired,
@@ -187,8 +187,7 @@ export default class TimeLine extends D3Component {
               }
               return '';
           })
-          .style('font', '11px sans-serif')
-          .style('fill', 'black');
+          .style('font', '11px sans-serif');
   };
 
   // KPI blocks //
@@ -253,8 +252,7 @@ export default class TimeLine extends D3Component {
           .attr('dy', -10)
           .text((kpi) => kpi)
           .style('text-anchor', 'middle')
-          .style('font', 'bold 16px sans-serif')
-          .style('fill', 'black');
+          .style('font', 'bold 16px sans-serif');
 
       KPIBlock.append('text')
           .attr('class', 'kpi-value')
@@ -328,7 +326,6 @@ export default class TimeLine extends D3Component {
               .attr('opacity', 0.4)
               .attr('dominant-baseline', 'central')
               .style('stroke', 'none')
-              .style('fill', 'black')
               .text(` = ${d[0]} (home/away)`);
       });
 
@@ -351,7 +348,6 @@ export default class TimeLine extends D3Component {
           .attr('opacity', 0.4)
           .attr('dominant-baseline', 'central')
           .style('stroke', 'none')
-          .style('fill', 'black')
           .text(' = Opponent');
 
       const legendElems = d3.selectAll('.legend-item');
@@ -458,23 +454,20 @@ export default class TimeLine extends D3Component {
           .append('text')
           .style('text-anchor', 'middle')
           .attr('dy', -50)
-          .text((d) => d)
-          .style('fill', 'black');
+          .text((d) => d);
 
       axes
           .append('text')
           .style('text-anchor', 'middle')
           .attr('dy', -37)
-          .text((d) => dimensionExtent[d][1])
-          .style('fill', 'black');
+          .text((d) => dimensionExtent[d][1]);
 
       axes
           .append('text')
           .style('text-anchor', 'middle')
           .attr('y', this.height)
           .attr('dy', 45)
-          .text((d) => dimensionExtent[d][0])
-          .style('fill', 'black');
+          .text((d) => dimensionExtent[d][0]);
 
       const labels = this.pcp
           .append('g')
@@ -693,14 +686,12 @@ export default class TimeLine extends D3Component {
                   rankChange
                       .append('path')
                       .attr('d', `m ${this.x(d.Match)} -75 l 10 0 l -5 10`)
-                      .attr('transform', 'translate(-10, 0)')
-                      .style('fill', 'black');
+                      .attr('transform', 'translate(-10, 0)');
               } else if (currentRank < previousRank) {
                   rankChange
                       .append('path')
                       .attr('d', `m ${this.x(d.Match)} -65 l 10 0 l -5 -10`)
-                      .attr('transform', 'translate(-10, 0)')
-                      .style('fill', 'black');
+                      .attr('transform', 'translate(-10, 0)');
               }
 
               if (currentRank !== previousRank) {
@@ -712,7 +703,6 @@ export default class TimeLine extends D3Component {
                       .attr('dy', '.35em')
                       .attr('text-anchor', 'left')
                       .style('stroke', 'none')
-                      .style('fill', 'black')
                       .text(d.Rank);
               }
           }
@@ -788,7 +778,6 @@ export default class TimeLine extends D3Component {
           .style('font-weight', 'bold')
           .style('vertical-baseline', 'middle')
           .style('stroke', 'none')
-          .style('fill', 'black')
           .text((d, i) => {
               if (opponentPoints[i] <= d['Points accumulated']) {
                   return `${d.Score}\n${d.Against}`;

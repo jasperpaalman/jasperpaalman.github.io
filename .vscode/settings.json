@@ -1,6 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "python.pythonPath": "c:\\Users\\JPaalman\\.virtualenvs\\Github_Pages-kMaWCAQH\\Scripts\\python.exe",
+  "python.pythonPath": "C:\\Users\\JPaalman\\.virtualenvs\\Github_Pages-kMaWCAQH\\Scripts\\python.exe",
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": ["--enable=W0614", "--disable=no-member"],
   "python.linting.enabled": true,
