@@ -113,13 +113,15 @@ const TopMenu = ({ fixed }) => {
 
     return (
         <Menu pointing secondary fixed={style.fixed} style={style.style}>
-            {/* <CollisionChart
+            <CollisionChart
                 style={{
+                    opacity: fixed ? 1 : 0,
+                    transition: `opacity ${transitionStyle}`,
                     position: 'fixed',
                     width: '100vw',
                     height: '7vh',
                 }}
-            /> */}
+            />
             <Container>
                 <Menu.Menu>
                     <Image
