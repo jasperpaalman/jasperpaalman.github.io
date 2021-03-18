@@ -9,9 +9,12 @@ body {
 
 .menu {
   img {
+    transition: all 0.2s ease;
+
     &:hover {
       cursor: pointer;
       filter: drop-shadow(0 0 2px #51d5ff);
+      transform: scale(1.1);
     }
   }
 
@@ -35,6 +38,9 @@ body {
 .restart-button {
   &:hover {
     cursor: pointer;
+    > .restart-block {
+      fill: #3791ad !important;
+    }
   }
 }
 
