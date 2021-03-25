@@ -5,6 +5,7 @@ import { SectionHeader, SectionText, Stress } from '../elements/text';
 
 import './Projects.scss';
 
+import Election from '../subsections/Election/main';
 import Eredivisie from '../subsections/Eredivisie/main';
 import Corona from '../subsections/Corona/main';
 import Webscraper from '../subsections/Webscraper/main';
@@ -29,6 +30,7 @@ const Projects = () => (
             </SectionText>
         </Container>
 
+        <Election />
         <Eredivisie />
         <Corona />
         <Webscraper />

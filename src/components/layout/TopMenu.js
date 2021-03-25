@@ -35,6 +35,7 @@ const items = [
         name: 'projects',
         text: 'Projects',
         subitems: [
+            { key: 'election', name: 'election', text: 'Election' },
             { key: 'eredivisie', name: 'eredivisie', text: 'Eredivisie' },
             { key: 'corona', name: 'corona', text: 'Corona' },
             { key: 'webscraper', name: 'webscraper', text: 'Webscraper' },

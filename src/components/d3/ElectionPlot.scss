@@ -1,0 +1,20 @@
+#electionPlot {
+    .menu-option {
+        &:hover {
+            cursor: pointer;
+            > .menu-block {
+                fill: #3791ad !important;
+            }
+
+            > .menu-text {
+                fill: white !important;
+            }
+        }
+    }
+
+    .node {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
