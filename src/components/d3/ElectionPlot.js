@@ -3,21 +3,24 @@ import * as d3 from 'd3';
 import { darkBlue } from '../../theme';
 import D3Component from './D3Component';
 import './ElectionPlot.scss';
+import toIcon from '../../utils/toIcon';
 
 export default class ElectionPlot extends D3Component {
     constructor(props) {
         super(props);
         this.state = {
+            // %
             margin: {
-                top: 40,
-                right: 100,
-                bottom: 40,
-                left: 100,
+                top: 0.1,
+                right: 0.1,
+                bottom: 0.05,
+                left: 0.1,
             },
+            // %
             offset: {
                 top: 0,
                 right: 0,
-                bottom: 20,
+                bottom: 0.05,
                 left: 0,
             },
             previous: null,
@@ -34,12 +37,17 @@ export default class ElectionPlot extends D3Component {
       // Globals //
       /// //////////
 
+      // Full width and height
+      this.fullWidth = width;
+      this.fullHeight = height;
       // Screen factor
       this.screenFactor = Math.min(width, height) / 350;
       // Transition duration
       this.transitionDuration = 1000;
       // Node size
       this.nodeSize = 7 * this.screenFactor;
+      // Icon size
+      this.iconSize = 25 * this.screenFactor;
       // Min and max number of seats
       this.seatsLowerBound = 0;
       this.seatsUpperBound = 35;
@@ -72,20 +80,14 @@ export default class ElectionPlot extends D3Component {
       // Get parties
       this.partyList = Object.keys(this.data);
 
-      this.width = width
-      - this.resizeToScreen(margin.left)
-      - this.resizeToScreen(margin.right);
-      this.height = height
-      - this.resizeToScreen(margin.top)
-      - this.resizeToScreen(margin.bottom);
+      this.width = width * (1 - margin.left - margin.right);
+      this.height = height * (1 - margin.top - margin.bottom);
 
       this.main = svg
           .append('g')
           .attr(
               'transform',
-              `translate(${this.resizeToScreen(margin.left)},${this.resizeToScreen(
-                  margin.top,
-              )})`,
+              `translate(${margin.left * width},${margin.top * height})`,
           )
           .attr('id', 'electionPlot')
           .attr('class', 'persistent');
@@ -111,10 +113,7 @@ export default class ElectionPlot extends D3Component {
       this.axisX = this.main
           .append('g')
           .attr('class', 'axis axis-x persistent')
-          .attr(
-              'transform',
-              `translate(0,${this.height + this.resizeToScreen(offset.bottom)})`,
-          );
+          .attr('transform', `translate(0,${this.height * (1 + offset.bottom)})`);
 
       this.axisY = this.main
           .append('g')
@@ -143,7 +142,7 @@ export default class ElectionPlot extends D3Component {
       this.nodes
           .append('title')
           .attr('class', 'tooltip persistent')
-          .text((p) => p);
+          .text((p) => `${p} (${this.data[p].seats})`);
 
       /// /////////
       // Update //
@@ -154,6 +153,12 @@ export default class ElectionPlot extends D3Component {
 
   updateDraw = () => {
       const { current } = this.state;
+
+      // Remove any simulation
+      clearTimeout(this.delayedSimulation);
+      if (this.simulation) {
+          this.simulation.stop();
+      }
 
       // Clear SVG of non-persistent elements
       const nonPersistent = this.main
@@ -166,11 +171,6 @@ export default class ElectionPlot extends D3Component {
 
       this.nodes.on('click', null).on('mouseover', null).on('mouseout', null);
 
-      // Remove any simulation
-      if (this.simulation) {
-          this.simulation.stop();
-      }
-
       // Callback
       const callback = {
           Overview: this.plotOverview,
@@ -182,11 +182,12 @@ export default class ElectionPlot extends D3Component {
   };
 
   plotMenu = () => {
-      const options = ['Overview', 'Force', 'Difference'];
+      const { margin } = this.state;
+      const options = ['Overview', 'Difference', 'Force'];
       const optionHeight = this.resizeToScreen(20);
       const optionWidth = this.resizeToScreen(60);
       const spacing = this.resizeToScreen(5);
-      const yOffset = this.resizeToScreen(30);
+      const yOffset = this.fullHeight * margin.top;
 
       const menu = this.main
           .append('g')
@@ -237,7 +238,8 @@ export default class ElectionPlot extends D3Component {
 
       this.x
           .domain([this.seatsLowerBound, this.seatsUpperBound])
-          .range([0, this.width]);
+      // Start with slight offset to prevent overflow of text to the left
+          .range([40, this.width]);
 
       // Build the X scale - each date maps to a x-location
       this.y.domain(this.partyList).range([0, this.height]);
@@ -326,38 +328,120 @@ export default class ElectionPlot extends D3Component {
           .attr('opacity', 1);
   };
 
+  toggleParty = (event, data) => {
+      // Make selection
+      const node = d3.select(event.currentTarget);
+      const partyName = node.datum().name;
+      const nodeData = data.find((d) => d.name === partyName);
+      nodeData.selected = !nodeData.selected;
+
+      // Change force left <---> right
+      this.simulation.force(
+          'x',
+          d3
+              .forceX()
+              .strength((p, i, elem) => {
+                  // When selected increased strength
+                  if (partyName === elem[i].name) {
+                      return 0.2;
+                  }
+                  // Otherwise normal
+                  return 0.02;
+              })
+              .x((p) => {
+                  if (p.selected) {
+                      return this.width * 0.75;
+                  }
+                  return this.width * 0.25;
+              }),
+      );
+
+      // Reset force to normal (0.02)
+      setTimeout(
+          () => this.simulation.force(
+              'x',
+              d3
+                  .forceX()
+                  .strength(0.02)
+                  .x((p) => {
+                      if (p.selected) {
+                          return this.width * 0.75;
+                      }
+                      return this.width * 0.25;
+                  }),
+          ),
+          25,
+      );
+
+      // Re-calculate the counts
+      this.main.selectAll('.counts .count').text((d, i) => data
+          .filter((d1) => (d === 'unselected' ? !d1.selected : d1.selected))
+          .map((d2) => this.data[d2.name].seats)
+          .reduce((a, b) => a + b, 0));
+
+      // Alter icon selectors
+      this.main
+          .selectAll('.selection .selector')
+          .filter((d) => d.name === partyName)
+          .attr('opacity', (p, i, elem) => {
+              const parent = d3.select(elem[i].parentNode);
+              const state = parent.datum();
+
+              if (state === 'selected') {
+                  if (p.selected) {
+                      return 1;
+                  }
+                  return 0.2;
+              }
+              if (!p.selected) {
+                  return 1;
+              }
+              return 0.2;
+          });
+  };
+
+  sleep = (milliseconds) => {
+      const dt = new Date();
+      while (new Date() - dt <= milliseconds) {
+      /* Do nothing */
+      }
+  };
+
   plotForce = () => {
       /// /////////////
       // Simulation //
       /// /////////////
 
+      const relStartX = 0.25;
+      const relStartY = 0.5;
+
       const data = this.partyList.map((p) => ({
           name: p,
           selected: false,
-          x: this.width * 0.25,
-          y: this.height * 0.75,
+          x: this.width * relStartX,
+          y: this.height * relStartY,
       }));
 
       this.nodes
           .data(data)
           .transition()
           .duration(this.transitionDuration)
-          .attr('r', (p) => this.data[p.name].seats * 1.5)
-          .attr('cx', this.width * 0.25)
-          .attr('cy', this.height * 0.75);
+          .attr('r', (p) => this.data[p.name].seats * this.screenFactor * 0.5)
+          .attr('cx', this.width * relStartX)
+          .attr('cy', this.height * relStartY);
 
       // Force simulation function
       this.simulation = d3
           .forceSimulation(data)
           .alphaTarget(0.3) // stay hot
           .velocityDecay(0.1) // low friction
-          .force('x', d3.forceX(this.width * 0.25).strength(0.02))
-          .force('y', d3.forceY(this.height * 0.75).strength(0.02)) // middle
+          .force('x', d3.forceX(this.width * relStartX).strength(0.02))
+          .force('y', d3.forceY(this.height * relStartY).strength(0.02)) // middle
           .force(
               'collide',
               d3
                   .forceCollide()
-                  .radius((p) => this.data[p.name].seats * 1.5 + 4)
+                  .radius((p) => this.data[p.name].seats * this.screenFactor * 0.5 + 4)
                   .iterations(1),
           )
           .on('tick', () => {
@@ -366,7 +450,10 @@ export default class ElectionPlot extends D3Component {
 
       // Delay
       this.simulation.stop();
-      setTimeout(() => this.simulation.restart(), this.transitionDuration);
+      this.delayedSimulation = setTimeout(
+          () => this.simulation.restart(),
+          this.transitionDuration,
+      );
 
       /// ////////
       // Count //
@@ -386,75 +473,88 @@ export default class ElectionPlot extends D3Component {
           .append('text')
           .attr('class', (d) => `count ${d}`)
           .attr('text-anchor', 'middle')
-          .attr('dominant-baseline', 'central')
-          .attr('x', (d, i) => (d === 'unselected' ? this.width * 0.25 : this.width * 0.75))
-          .attr('y', this.height * 0.25)
+          .attr('dominant-baseline', 'text-before-edge')
+          .attr('x', (d, i) => (d === 'selected' ? this.width * 0.75 : this.width * 0.25))
+      //   .attr('y', this.height * 0.25)
           .style('font', '18px sans-serif')
           .style('fill', '#383838')
           .text((d, i) => data
-              .filter((d1) => (d === 'unselected' ? !d1.selected : d1.selected))
+              .filter((d1) => (d === 'selected' ? d1.selected : !d1.selected))
               .map((d2) => this.data[d2.name].seats)
               .reduce((a, b) => a + b, 0));
 
-      // Animate
+      counts.transition().duration(this.transitionDuration).attr('opacity', 1);
+
+      /// ////////////
+      // Selection //
+      /// ////////////
+
+      const spacing = 5 * this.screenFactor;
+
+      const selections = this.main
+          .append('g')
+          .attr('class', 'selections')
+          .attr('opacity', 0);
+
+      const selection = selections
+          .selectAll('g')
+          .data(options)
+          .enter()
+          .append('g')
+          .attr('class', (d) => `selection ${d}`);
+
+      selection
+          .selectAll('image')
+          .data(data)
+          .enter()
+          .append('image')
+          .attr('id', (p) => `icon-${p.name}`)
+          .attr('class', 'icon selector')
+          .attr('xlink:href', (p) => toIcon(p.name))
+          .attr('width', this.iconSize)
+          .attr('height', this.iconSize)
+          .attr('opacity', (p, i, elem) => {
+              const parent = d3.select(elem[i].parentNode);
+              const state = parent.datum();
+
+              if (state === 'selected') {
+                  if (p.selected) {
+                      return 1;
+                  }
+                  return 0.2;
+              }
+              if (!p.selected) {
+                  return 1;
+              }
+              return 0.2;
+          })
+          .attr('x', (p, i, elem) => {
+              const parent = d3.select(elem[i].parentNode);
+              const state = parent.datum();
+              const xOffset = state === 'selected' ? this.width - 2 * (this.iconSize + spacing) : 0;
+
+              return xOffset + (this.iconSize + spacing) * (i % 2);
+          })
+          .attr('y', (p, i) => Math.floor(i / 2) * (this.iconSize + spacing))
+          .on('touchmove', (event) => event.preventDefault())
+          .on('click', (event) => this.toggleParty(event, data));
+
+      selections
+          .transition()
+          .duration(this.transitionDuration)
+          .attr('opacity', 1);
+
+      /// //////////
+      // Animate //
+      /// //////////
+
       this.nodes
           .on('mouseover', (event) => d3
               .select(event.currentTarget)
               .style('stroke-width', 3)
               .style('stroke', '#383838'))
           .on('mouseout', (event) => d3.select(event.currentTarget).style('stroke', null))
-          .on('click', (event) => {
-              // Make selection
-              const node = d3.select(event.currentTarget);
-              const nodeData = data.find((d) => d.name === node.datum().name);
-              nodeData.selected = !nodeData.selected;
-
-              // Change force left <---> right
-              this.simulation.force(
-                  'x',
-                  d3
-                      .forceX()
-                      .strength((p, i, elem) => {
-                          // When selected increased strength
-                          if (node.datum().name === elem[i].name) {
-                              return 0.2;
-                          }
-                          // Otherwise normal
-                          return 0.02;
-                      })
-                      .x((p) => {
-                          if (p.selected) {
-                              return this.width * 0.75;
-                          }
-                          return this.width * 0.25;
-                      }),
-              );
-
-              // Reset force to normal (0.02)
-              setTimeout(
-                  () => this.simulation.force(
-                      'x',
-                      d3
-                          .forceX()
-                          .strength(0.02)
-                          .x((p) => {
-                              if (p.selected) {
-                                  return this.width * 0.75;
-                              }
-                              return this.width * 0.25;
-                          }),
-                  ),
-                  25,
-              );
-
-              // Re-calculate the counts
-              d3.selectAll('.count').text((d, i) => data
-                  .filter((d1) => (d === 'unselected' ? !d1.selected : d1.selected))
-                  .map((d2) => this.data[d2.name].seats)
-                  .reduce((a, b) => a + b, 0));
-          });
-
-      counts.transition().duration(this.transitionDuration).attr('opacity', 1);
+          .on('click', (event) => this.toggleParty(event, data));
   };
 
   plotDifference = () => {
