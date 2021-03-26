@@ -23,17 +23,19 @@ const Election = () => (
                     persistent elements.
                     <br />
                     <br />
-                    Three different visualizations are available: Overview, Force and
-                    Difference. The
+                    Three different visualizations are available: Overview, Difference and
+                    Force. The
                     <Stress> Overview </Stress>
-                    tab shows the general results, with differences. The
+                    tab shows the general results, with differences included. The
+                    <Stress> Difference </Stress>
+                    tab shows a basic visualization concentrated on higlighting relative
+                    increase or decline. Lastly, the
                     <Stress> Force </Stress>
                     tab presents an interactive visualization where you can play around
                     with different coalitions. Hover your cursor over a node and it will
-                    indicate what party is refered to. Lastly, the
-                    <Stress> Difference </Stress>
-                    tab shows a basic visualization concentrated on higlighting relative
-                    increase or decline.
+                    indicate what party is refered to or use the icons instead. Simply
+                    click and the selected party will switch sides. If only it were that
+                    simple..
                 </p>
             </SectionText>
         </Container>
