@@ -166,7 +166,9 @@ export default class ElectionPlot extends D3Component {
           .filter((d, i, elem) => !d3.select(elem[i]).classed('persistent'));
       nonPersistent.remove();
 
-      // Reset Nodes
+      // Interrupt any node transition and revert to original size and functionality
+      this.nodes.interrupt();
+
       this.nodes.data(this.partyList).attr('r', this.nodeSize);
 
       this.nodes.on('click', null).on('mouseover', null).on('mouseout', null);
@@ -343,7 +345,7 @@ export default class ElectionPlot extends D3Component {
               .strength((p, i, elem) => {
                   // When selected increased strength
                   if (partyName === elem[i].name) {
-                      return 0.2;
+                      return 0.3;
                   }
                   // Otherwise normal
                   return 0.02;
@@ -370,7 +372,7 @@ export default class ElectionPlot extends D3Component {
                       return this.width * 0.25;
                   }),
           ),
-          25,
+          20,
       );
 
       // Re-calculate the counts
@@ -398,13 +400,6 @@ export default class ElectionPlot extends D3Component {
               }
               return 0.2;
           });
-  };
-
-  sleep = (milliseconds) => {
-      const dt = new Date();
-      while (new Date() - dt <= milliseconds) {
-      /* Do nothing */
-      }
   };
 
   plotForce = () => {
